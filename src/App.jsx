@@ -21,7 +21,7 @@ function App() {
      <div className="card-body">
      <h5 className="card-title">{item.title}</h5>
       <p className="card-text">$ {item.price} </p>
-      <Link to={`./componente/${item.id}`}><button className='btn btn-primary'>Mas Detalles</button></Link>
+      <Link to={`./componente/${item.id}`}><button className='btn btn-primary'>More Details</button></Link>
    
     </div>
     </div>
