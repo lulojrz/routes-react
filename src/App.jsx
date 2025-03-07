@@ -2,6 +2,7 @@ import { useState ,useEffect} from 'react'
 import './App.css'
 import { Routes ,Route,Link} from 'react-router-dom'
 import Componente from './componente'
+import Header from './header'
 
 function App() {
   const [user,Setusers] = useState([])
@@ -34,6 +35,7 @@ function App() {
   return (
  
     <>
+    <Header></Header>
     <Routes>
     <Route path="/componente/:id" element = {<Componente/>} ></Route>
     </Routes>
