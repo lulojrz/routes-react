@@ -1,5 +1,6 @@
 import {  useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Cart from "./cart";
 const Componente = () => {
   const [producto, SetProducto] = useState([]);
   const { id } = useParams();
@@ -29,17 +30,28 @@ const Componente = () => {
       updatedCarrito[existingProductIndex].cant += 1;
       setCarrito(updatedCarrito);
     } else {
-  
-      setCarrito([...carrito, object]);
+      const newCarrito = [...carrito, object];
+      setCarrito(newCarrito);
     }
   
     console.log(carrito);
+  }
+  const [isFalse,setisFalse] = useState(false)
+  const handleClick = () => {
+      setisFalse(!isFalse)
   }
 
 
 
   return (
     <>
+
+       <button className={isFalse ? "btn btn-danger cart-button" : "btn btn-primary cart-button" } onClick={handleClick} >
+        {!isFalse ? <i className="fa-solid fa-cart-shopping"></i> : "X" }
+       </button>
+       {
+        isFalse? <Cart cart={carrito}></Cart> : " " 
+       }
       {producto && (
         <section className="section-products">
           <h5>
