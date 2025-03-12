@@ -1,10 +1,10 @@
-import {  useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Cart from "./cart";
+import {useEffect, useState} from 'react';
+import {useParams} from "react-router-dom";
+
 const Componente = () => {
   const [producto, SetProducto] = useState([]);
-  const { id } = useParams();
-  const [carrito,setCarrito] = useState([])
+  const {id} = useParams();
+
 
   const getUser = async (id) => {
     const response = await fetch(`https://fakestoreapi.com/products/${id}`);
@@ -15,43 +15,10 @@ const Componente = () => {
     getUser(id);
   }, [id]);
 
-  const addCart = () => {
-    const object = {
-      id: producto.id,
-      title: producto.title,
-      price: producto.price,
-      cant: 0,
-    }
-    
-    const existingProductIndex = carrito.findIndex(item => item.id === object.id); 
-    
-    if (existingProductIndex !== -1) {
-      const updatedCarrito = [...carrito];
-      updatedCarrito[existingProductIndex].cant += 1;
-      setCarrito(updatedCarrito);
-    } else {
-      const newCarrito = [...carrito, object];
-      setCarrito(newCarrito);
-    }
-  
-    console.log(carrito);
-  }
-  const [isFalse,setisFalse] = useState(false)
-  const handleClick = () => {
-      setisFalse(!isFalse)
-  }
-
 
 
   return (
-    <>
-
-       <button className={isFalse ? "btn btn-danger cart-button" : "btn btn-primary cart-button" } onClick={handleClick} >
-        {!isFalse ? <i className="fa-solid fa-cart-shopping"></i> : "X" }
-       </button>
-       {
-        isFalse? <Cart cart={carrito}></Cart> : " " 
-       }
+    <div className="component-container">
       {producto && (
         <section className="section-products">
           <h5>
@@ -70,13 +37,15 @@ const Componente = () => {
             </div>
             <div className="right-container">
               <h3>Price: $ {producto.price}</h3>
-              <button className="btn btn-primary" onClick={addCart}>Buy <i className="fa-solid fa-cart-plus"></i></button>
+              <button className="btn btn-primary">
+                Buy <i className="fa-solid fa-cart-plus"></i>
+              </button>
             </div>
           </div>
-          <h1>More Products</h1>
         </section>
       )}
-    </>
+    
+    </div>
   );
 };
 
